@@ -1,4 +1,4 @@
-package com.example.fatura.securityConfig;
+package com.example.fatura.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,11 +14,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/swagger-ui/index.html","/swagger-ui.html","/swagger-ui/**","/v2/api-docs/**", "/swagger-resources/**").permitAll()
-                .antMatchers("/api/customer/add").permitAll()
-                .antMatchers("/api/customer/getall").permitAll()
-                .antMatchers("/api/customer/login").permitAll()
-                .antMatchers("/api/customer/deleteaccount").permitAll()
-
+                .antMatchers("/api/customer/**", "/api/product/**").permitAll() //Eklenen apiler için tek tek izin vermemek için.
+                .antMatchers("/api/filecontroller/**").permitAll()
                 .anyRequest().authenticated()
 
                 .and()

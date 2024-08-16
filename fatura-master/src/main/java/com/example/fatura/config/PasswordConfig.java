@@ -1,4 +1,4 @@
-package com.example.fatura.securityConfig;
+package com.example.fatura.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
