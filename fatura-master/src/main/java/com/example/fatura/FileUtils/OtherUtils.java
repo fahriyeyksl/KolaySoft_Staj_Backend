@@ -13,30 +13,37 @@ public class OtherUtils {
         byte[] fileContent = Files.readAllBytes(file.toPath());
         return Base64.getEncoder().encodeToString(fileContent);
     }
-    public static String updateCss(String cssContent, String selector, String newTransform) {
+    public static String updateCss(String cssContent, String selector, String newTop, String newLeft) {
         StringBuilder updatedCss = new StringBuilder();
         boolean inSelector = false;
-        boolean transformUpdated = false;
-
+        boolean topUpdated = false;
+        boolean leftUpdated = false;
         String[] lines = cssContent.split("\\n");
-
         for (String line : lines) {
-            if (line.trim().startsWith(selector)) {
+            if (line.trim().startsWith(selector )) {
                 inSelector = true;
                 updatedCss.append(selector).append(" {\n");
             } else if (inSelector && line.trim().endsWith("}")) {
-                if (!transformUpdated) {
-                    // Eğer transform henüz güncellenmediyse, yeni transform değerini ekle
-                    updatedCss.append("    ").append(newTransform).append("\n");
-                    transformUpdated = true;
+                // Eğer top veya left henüz güncellenmediyse, burada ekle
+                if (!topUpdated) {
+                    updatedCss.append("    ").append(newTop).append("\n");
+                }
+                if (!leftUpdated) {
+                    updatedCss.append("    ").append(newLeft).append("\n");
                 }
                 updatedCss.append(line).append("\n");
                 inSelector = false;
-            } else if (inSelector && line.trim().startsWith("transform:")) {
-                // Sadece ilk transform ifadesini güncelle
-                if (!transformUpdated) {
-                    updatedCss.append("    ").append(newTransform).append("\n");
-                    transformUpdated = true;
+            } else if (inSelector && line.trim().startsWith("top:")) {
+                // İlk top ifadesini güncelle
+                if (!topUpdated) {
+                    updatedCss.append("    ").append(newTop).append("\n");
+                    topUpdated = true;
+                }
+            } else if (inSelector && line.trim().startsWith("left:")) {
+                // İlk left ifadesini güncelle
+                if (!leftUpdated) {
+                    updatedCss.append("    ").append(newLeft).append("\n");
+                    leftUpdated = true;
                 }
             } else {
                 updatedCss.append(line).append("\n");
@@ -45,4 +52,43 @@ public class OtherUtils {
 
         return updatedCss.toString();
     }
+    public static String updateText(String cssContent, String cssID, String objectKeys, String objectValue) {
+        StringBuilder updateCss = new StringBuilder();
+        boolean inSelector = false;
+        boolean styleUpdated = false;
+        String[] lines = cssContent.split("\\n");
+
+        for (String line : lines) {
+
+            if (line.trim().startsWith(cssID + " {")) {
+                System.out.println(cssID );
+                inSelector = true;
+                updateCss.append(line).append("\n"); 
+            } else if (inSelector && line.trim().endsWith("}")) {
+                if (!styleUpdated) {
+                    updateCss.append(objectKeys).append(":").append(objectValue).append(";\n");
+                }
+                updateCss.append(line).append("\n");
+                inSelector = false;
+            } else if (inSelector && line.trim().startsWith(objectKeys + ":")) {
+
+                updateCss.append(objectKeys).append(":").append(objectValue).append(";\n");
+
+                styleUpdated = true;
+            } else {
+
+                updateCss.append(line).append("\n");
+            }
+        }
+
+
+        if (!inSelector && !styleUpdated) {
+            updateCss.append("    ").append(objectKeys).append(": ").append(objectValue).append(";\n");
+        }
+
+        return updateCss.toString();
+    }
+
+
+
 }

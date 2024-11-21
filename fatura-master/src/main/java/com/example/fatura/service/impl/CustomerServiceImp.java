@@ -65,20 +65,24 @@ public class CustomerServiceImp implements CustomerService {
     }
 
     @Override
-    public ResponseEntity<Result> login(@RequestParam String customerEmail,@RequestParam String customerPassword) {
+    public ResponseEntity<Result> login(@RequestParam String customerEmail, @RequestParam String customerPassword) {
         try {
-            Customer loginCustomer = customerRepository.findByCompanyEmail("info@kolaysoft.com.tr");
-            if (loginCustomer != null && passwordEncoder.matches(customerPassword, loginCustomer.getCompanyPassword())){
-                return new ResponseEntity<>(new  SuccesResult("Giriş başarılı." ), HttpStatus.OK);
+            Customer loginCustomer = customerRepository.findByCompanyEmail(customerEmail);
+            if (loginCustomer == null) {
+                System.out.println("Kullanıcı bulunamadı: " + customerEmail);
+                return new ResponseEntity<>(new ErrorResult("Email veya şifre hatalı!"), HttpStatus.UNAUTHORIZED);
             }
-            else {
-                return new ResponseEntity<>(new  ErrorResult("Email veya şifre hatalı!" ), HttpStatus.UNAUTHORIZED); //Kimlik doğrulama başarısız ise 401 Unauthorized döndürüyoruz.
+            if (!passwordEncoder.matches(customerPassword, loginCustomer.getCompanyPassword())) {
+                System.out.println("Şifre uyuşmuyor: " + customerPassword);
+                return new ResponseEntity<>(new ErrorResult("Email veya şifre hatalı!"), HttpStatus.UNAUTHORIZED);
             }
-        }catch (Exception e){
-            return new ResponseEntity<>(new ErrorResult("Oturum açılma sırasında beklenmeyen bir hata oluştu" ), HttpStatus.INTERNAL_SERVER_ERROR); //Sunucuda bir hata oluşursa 500 INTERNAL_SERVER_ERROR hatası döndürüyoruz.
+            return new ResponseEntity<>(new SuccesResult("Giriş başarılı."), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace(); // Hata detaylarını görmek için
+            return new ResponseEntity<>(new ErrorResult("Oturum açılma sırasında beklenmeyen bir hata oluştu"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
     }
+
 
     @Override
     public ResponseEntity<Result> deleteaccount(String customerEmail, String customerPassword) {
