@@ -1,5 +1,5 @@
-package com.example.fatura.service;
-import com.example.fatura.FileUtils.XmlUtil;
+package com.example.fatura.service.impl;
+import com.example.fatura.service.FileService;
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.*;
@@ -23,118 +23,44 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
+import java.util.Base64;
 import java.util.Map;
+import java.util.UUID;
 
 import static com.example.fatura.FileUtils.OtherUtils.updateText;
-import static com.example.fatura.FileUtils.OtherUtils.updateCss;
 import static com.example.fatura.FileUtils.XsltUtil.getXslt;
 
 @Service
 public class FileServiceImp implements FileService {
 
 
-    @Override
-    //giriş/ çıkış hataları veya xslt dönüşüm hataları fırlatabilir
-    public ResponseEntity<byte[]> getInvoiceByte() throws IOException, TransformerException {
-        // XSLT dosyasının yolunu belirtiyoruz
-        Path xsltPath = Paths.get("C:\\Users\\Fahri\\IdeaProjects\\KolaySoftFatura\\backend\\fatura-master\\src\\main\\resources\\static\\billXslt.xslt");
-        Path xmlPath = Paths.get("C:\\Users\\Fahri\\IdeaProjects\\KolaySoftFatura\\backend\\fatura-master\\src\\main\\resources\\static\\bill.xml");
-        // XSLT ve XML dosyalarını okuyor ve string olarak saklıyoruz
-        String xslt = new String(Files.readAllBytes(xsltPath), StandardCharsets.UTF_8);
-        String xml = new String(Files.readAllBytes(xmlPath),StandardCharsets.UTF_8);
 
-
-        TransformerFactory transformerFactory = TransformerFactory.newInstance(); //Xslti dönüşümü için transformerFactory oluşturuyoruz
-        transformerFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
-
-        StringReader xsltReader = new StringReader(xslt);  // Xslt içeriğini okuyacak StringReader oluşturulur
-        StreamSource xsltSource = new StreamSource(xsltReader);  //StringReader kullanarak bir streamSource oluşturulur ve bu xslt dosyasının kaynak olarak kullanılmasını sağlar
-
-        Transformer transformer = transformerFactory.newTransformer(xsltSource); //Xslti dönüşümünü gerçekleştirmek için oluşturulur
-
-        StringReader xmlReader = new StringReader(xml); //Xml içeriğini okuyacak StringReader oluşturulur
-        StreamSource xmlSource = new StreamSource(xmlReader); // Xml içeriğini StreamSource nesnesi olarak sarar ve bu xml verisini kaynak olarak kullanılmasını sağlar
-
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(); //Dönüştürülen HTML içeriğini saklamak için ByteArrayOutputStream nesnesi oluşturuypruz
-        try (OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8)) {
-            StreamResult outputStreamResult = new StreamResult(outputStreamWriter); //Dönüşüm sonucunu yazmaj için StreamResult nesnesi oluşturuyoruz
-            transformer.transform(xmlSource, outputStreamResult); //XML kaynağını XSLT ile dönüştürüyoruz ve sonucu outputStreamResult a yazıyoruz
-        }
-
-
-        byte[] responseBytes = outputStream.toByteArray(); //ByteArrayOutputStream içeriğini bir byte dizisine dönüştürüyoruz
-
-
-        HttpHeaders headers = new HttpHeaders(); //Yanıt başlıkları için HttpHeaders nesnesi oluşturuyoruz
-        headers.setContentType(MediaType.TEXT_HTML); //İçeriğin MIME türünü text/html olarak ayarlıyoruz
-        headers.setContentDispositionFormData("attachment", "invoice.html"); //Yanıtın bir dosya olarak indirilmesini sağlıyoruz
-
-
-        headers.setCacheControl(CacheControl.noCache()); //Tarayıcının ön belleğini temizleyerek her seferinde yeni bir yanıt olmasını sağlar
-
-        return new ResponseEntity<>(responseBytes, headers, HttpStatus.OK);
-    }
 
 
     @Override
-    public ResponseEntity<?> uppdateXslt(Map<String, List<Double>> positionMap) {
+    public ResponseEntity<?> dowloadXslt() throws IOException, TransformerException {
         try {
-            String xslt = getXslt(); // XSLT dosyasını alıyoruz
-
-            // XSLT içeriğini Document nesnesine dönüştür
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            factory.setNamespaceAware(true);
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document document = builder.parse(new ByteArrayInputStream(xslt.getBytes(StandardCharsets.UTF_8)));
-
-            // CSS stilini güncelle
-            NodeList styleNodes = document.getElementsByTagName("style");
-            for (int i = 0; i < styleNodes.getLength(); i++) {
-                Node styleNode = styleNodes.item(i);
-                if (styleNode.getNodeType() == Node.ELEMENT_NODE) {
-                    //System.out.println(cssContent);
-
-                    for (Map.Entry<String, List<Double>> entry : positionMap.entrySet()) {
-                        Element styleElement = (Element) styleNode;
-                        String cssContent = styleElement.getTextContent(); // Mevcut CSS içeriğini alıyoruz
-                        String cssSelector = "#"+ entry.getKey();
-                        List<Double> positions = entry.getValue();
-
-                            // İlk double değerlerini al
-                            double logoPositionX = positions.get(0); // X pozisyonu
-
-                            double logoPositionY = positions.get(1); // Y pozisyonu
-                            // Yeni top ve left değerlerini oluştur
-                            String newTop = String.format("top: %spx;", logoPositionY);
-                            String newLeft = String.format("left: %spx;", logoPositionX);
-
-                            // CSS içeriğini güncelle
-                            cssContent = updateCss(cssContent, cssSelector, newTop, newLeft);// Güncellenmiş içeriği atıyoruz
-                           styleElement.setTextContent(cssContent); // Güncellenmiş CSS içeriğini yaz
-
-                    }
-                }
+            Path xsltPath = Paths.get("C:\\Users\\Fahri\\IdeaProjects\\KolaySoftFatura\\backend\\fatura-master\\src\\main\\resources\\static\\billXslt.xslt");
+            ClassPathResource xmlFile = new ClassPathResource("static/bill.xml");
+            String xsltContent = new String(Files.readAllBytes((xsltPath)), StandardCharsets.UTF_8);
+            String xmlContent = new String(Files.readAllBytes(xmlFile.getFile().toPath()), StandardCharsets.UTF_8);
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            StringReader xsltReader = new StringReader(xsltContent);
+            StreamSource xsltSource = new StreamSource(xsltReader);
+            Transformer transformer = transformerFactory.newTransformer(xsltSource);
+            StringReader xmlReader = new StringReader(xmlContent);
+            StreamSource xmlSource = new StreamSource(xmlReader);
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            try (OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8)) {
+                StreamResult outputStreamResult = new StreamResult(outputStreamWriter);
+                transformer.transform(xmlSource, outputStreamResult);
             }
-
-            // Güncellenmiş CSS içeriğini dosyaya yaz
-            Path filePath = Paths.get("C:\\Users\\Fahri\\IdeaProjects\\KolaySoftFatura\\backend\\fatura-master\\src\\main\\resources\\static\\billXslt.xslt"); // Güncellenmiş Css içeriğini yazmak için dosya yolunu belirtiyoruz
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile()))) {
-                TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                Transformer transformer = transformerFactory.newTransformer();
-                DOMSource source = new DOMSource(document);
-                StreamResult result = new StreamResult(writer);
-                transformer.transform(source, result);
-            }
-
-            return ResponseEntity.ok("XSLT updated successfully.");
+            return new ResponseEntity<byte[]>(outputStream.toByteArray(), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating XSLT.");
+            return new ResponseEntity<>("Error  XSLT: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 
 
     @Override
@@ -153,10 +79,9 @@ public class FileServiceImp implements FileService {
                         Element styleElement = (Element) styleNode;
                         String cssContent = styleElement.getTextContent();
                         String  cssID = "#" +  entry.getKey();
-                        System.out.println("TABLE ID: " + cssID);
                         Map<String,String> object = entry.getValue();
                         for (Map.Entry<String, String> styles : object.entrySet()) {
-                            String styleName = styles.getKey().toLowerCase(); // Stil isimlerini küçük harfe çevirip kontrol edebilirsiniz
+                            String styleName = styles.getKey().toLowerCase();
                             String styleValue = styles.getValue();
 
                             if (styleName.equals("fontsize") && styleValue != null) {
@@ -189,12 +114,14 @@ public class FileServiceImp implements FileService {
                             }
                             if(styleName.equals("width") && styleValue != null) {
                                 cssContent = updateText(cssContent, cssID, "width", styleValue);
-                                System.out.println(styleName);
-                                System.out.println(styleValue);
                                 styleElement.setTextContent(cssContent);
                             }
                             if(styleName.equals("height") && styleValue != null) {
                                 cssContent = updateText(cssContent, cssID, "height", styleValue);
+                                styleElement.setTextContent(cssContent);
+                            }
+                            if(styleName.equals("bordercolor") && styleValue != null) {
+                                cssContent = updateText(cssContent, cssID, "border-color",styleValue);
                                 styleElement.setTextContent(cssContent);
                             }
                         }
@@ -202,13 +129,51 @@ public class FileServiceImp implements FileService {
                     }
                 }
             }
-            Path filePath = Paths.get("C:\\Users\\Fahri\\IdeaProjects\\KolaySoftFatura\\backend\\fatura-master\\src\\main\\resources\\static\\billXslt.xslt"); // Güncellenmiş XSLT içeriğini yazmak için dosya yolunu belirtiyoruz
+            Path filePathXslt = Paths.get("C:\\Users\\Fahri\\IdeaProjects\\KolaySoftFatura\\backend\\fatura-master\\src\\main\\resources\\static\\billXslt.xslt");
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePathXslt.toFile()))) {
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+                DOMSource source = new DOMSource(document);
+                StreamResult result = new StreamResult(writer);
+                transformer.transform(source, result);
+            }
+            UUID uuid = UUID.randomUUID();
+            Path filePath = Paths.get("C:\\Users\\Fahri\\IdeaProjects\\KolaySoftFatura\\backend\\fatura-master\\src\\main\\resources\\xslt\\" + uuid + ".xslt");
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile()))) {
                 TransformerFactory transformerFactory = TransformerFactory.newInstance();
                 Transformer transformer = transformerFactory.newTransformer();
                 DOMSource source = new DOMSource(document);
                 StreamResult result = new StreamResult(writer);
                 transformer.transform(source, result);
+            }
+            try {
+                Path filePathXml = Paths.get("C:\\Users\\Fahri\\IdeaProjects\\KolaySoftFatura\\backend\\fatura-master\\src\\main\\resources\\static\\bill.xml");
+                String baseXslt = Base64.getEncoder().encodeToString(xslt.getBytes(StandardCharsets.UTF_8));
+                File xmlFile = filePathXml.toFile();
+
+                DocumentBuilderFactory factoryxml = DocumentBuilderFactory.newInstance();
+                DocumentBuilder builderxml = factoryxml.newDocumentBuilder();
+                Document documentxml = builderxml.parse(xmlFile);
+
+                NodeList nodeList = documentxml.getElementsByTagName("cbc:EmbeddedDocumentBinaryObject");
+                for (int i = 0; i < nodeList.getLength(); i++) {
+                    Element element = (Element) nodeList.item(i);
+                    if (element.getAttribute("filename").equals("general.xslt")) {
+                        element.setTextContent(baseXslt);
+                        break;
+                    }
+                }
+                Path newXmlFilePath = Paths.get("C:\\Users\\Fahri\\IdeaProjects\\KolaySoftFatura\\backend\\fatura-master\\src\\main\\resources\\xslt\\" + uuid + ".xml");
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(newXmlFilePath.toFile()))) {
+                    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                    Transformer transformer = transformerFactory.newTransformer();
+                    DOMSource source = new DOMSource(documentxml);
+                    StreamResult result = new StreamResult(writer);
+                    transformer.transform(source, result);
+                }
+
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
 
             return ResponseEntity.ok("XSLT updated successfully.");
@@ -221,37 +186,24 @@ public class FileServiceImp implements FileService {
     @Override
     public ResponseEntity<?> showXslt() {
         try {
-            // XML ve XSLT dosyalarının yollarını belirtin
             ClassPathResource xmlFile = new ClassPathResource("static/bill.xml");
             Path xsltPath = Paths.get("C:\\Users\\Fahri\\IdeaProjects\\KolaySoftFatura\\backend\\fatura-master\\src\\main\\resources\\static\\billXslt.xslt");
-
-            // Dosyaların gerçekten yüklendiğini kontrol edin
             if (!xmlFile.exists() || !Files.exists(xsltPath)) {
                 return new ResponseEntity<>("XML or XSLT file not found", HttpStatus.NOT_FOUND);
             }
-
-            // XSLT dosyasını oku
             String xsltContent = new String(Files.readAllBytes(xsltPath), StandardCharsets.UTF_8);
 
-            // TransformerFactory ve Transformer'ı başlatın
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             StringReader xsltReader = new StringReader(xsltContent);
             Transformer transformer = transformerFactory.newTransformer(new StreamSource(xsltReader));
-
-            // StringWriter ile sonucu yakalayın
             StringWriter writer = new StringWriter();
             transformer.transform(new StreamSource(xmlFile.getInputStream()), new StreamResult(writer));
-
-            // HTML çıktısını alın
             String htmlOutput = writer.toString();
-
-            // HTML çıktısını ResponseEntity ile döndürün
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.TEXT_HTML);
             return new ResponseEntity<>(htmlOutput, headers, HttpStatus.OK);
 
         } catch (TransformerConfigurationException e) {
-            // XSLT dosyası ile ilgili hata olabilir
             return new ResponseEntity<>("XSLT File Error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
             e.printStackTrace();

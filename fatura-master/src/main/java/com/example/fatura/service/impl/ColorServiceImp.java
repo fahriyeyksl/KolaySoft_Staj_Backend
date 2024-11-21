@@ -1,7 +1,8 @@
-package com.example.fatura.service;
+package com.example.fatura.service.impl;
 
 import com.example.fatura.entities.Color;
 import com.example.fatura.repository.ColorRepository;
+import com.example.fatura.service.ColorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,13 +21,10 @@ public class ColorServiceImp implements ColorService {
 
     @Override
     public ResponseEntity<List<Color>> getAllColors() {
-        // Veritabanındaki tüm renkleri al
         List<Color> colors = colorRepository.findAll();
-        // Renk listesi boşsa 204 No Content döndür
         if (colors.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        // Renk listesi varsa 200 OK döndür
         return ResponseEntity.ok(colors);
     }
 }

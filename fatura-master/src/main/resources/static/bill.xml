@@ -22,7 +22,7 @@
                     <ds:KeyInfo>
                         <ds:X509Data>
                             <ds:X509Certificate>MIIFBjCCBIygAwIBAgIHMlVgKCnfMjAKBggqhkjOPQQDAzCB0TELMAkGA1UEBhMCVFIxGDAWBgNV BAcMD0dlYnplIC0gS29jYWVsaTFHMEUGA1UECgw+VMO8cmtpeWUgQmlsaW1zZWwgdmUgVGVrbm9s b2ppayBBcmHFn3TEsXJtYSBLdXJ1bXUgLSBUw5xCxLBUQUsxEDAOBgNVBAsMB0LEsExHRU0xTTBL BgNVBAMMRE1hbGkgTcO8aMO8ciBFbGVrdHJvbmlrIFNlcnRpZmlrYSBIaXptZXQgU2HEn2xhecSx Y8Sxc8SxIC0gU8O8csO8bSAzMB4XDTIzMTExNzEwMTg0N1oXDTI2MTExNjEwMTg0N1owRzETMBEG A1UEBRMKNTc1MDQ2NDAwMjEwMC4GA1UEAwwnS09MQVlTT0ZUIFRFS05PTE9KxLAgQU5PTsSwTSDF nsSwUktFVMSwMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxiex1/XiBJn0I+lmZKvD CVlPOn/EBTJ/IorJ/6IBpScdivH7LBQHf3Cq7CyKD9gSancwUUxyz8Y41Atg97uqAtMIhZ8HW10U gVrzBNcmmzz1RrWGZ9JHQy4rAtiPl34pgWYeeguK92yWSbmWQTIqk+KFLHkOwLwZbds4zCuPL9TU zN5Hg8H4fSkr+kqJ+oNMTEy/PFRTmnKwiVHKkMON4qMRtRIE6ucKxb9XvzoRtneCSXCC8vBMiKLZ hdDNm+LlmyJjMHnZ5RiYtFkR76Xpjqcn/siSOQ1MTVEyLoHhV0TsA9L9HML4sPtcb8oW2peSQ+li 8dIcnFQNVL2BFfvaDwIDAQABo4ICCzCCAgcwHwYDVR0jBBgwFoAUBjloES0EC4AUvbc5gqsEyPbY qXwwHQYDVR0OBBYEFKRkvPscvzNmM9GkiBESZ4Wm8xGhMA4GA1UdDwEB/wQEAwIHgDCBxgYDVR0g BIG+MIG7MIG4BgtghhgBAgEBBQcEATCBqDAqBggrBgEFBQcCARYeaHR0cDovL2RlcG8ua2FtdXNt Lmdvdi50ci9pbGtlMHoGCCsGAQUFBwICMG4MbEJ1IHNlcnRpZmlrYSBpbGUgaWxnaWxpIHNlcnRp ZmlrYSB1eWd1bGFtYSBlc2FzbGFyxLFuxLEgb2t1bWFrIGnDp2luIGJlbGlydGlsZW4gd2ViIHNp dGVzaW5pIHppeWFyZXQgZWRpbml6LjAMBgNVHRMBAf8EAjAAMBYGA1UdJQQPMA0GC2CGGAECAQEF BzIBMEEGA1UdHwQ6MDgwNqA0oDKGMGh0dHA6Ly9kZXBvLmthbXVzbS5nb3YudHIva3VydW1zYWwv bW1lc2hzLXMzLmNybDCBggYIKwYBBQUHAQEEdjB0MDwGCCsGAQUFBzAChjBodHRwOi8vZGVwby5r YW11c20uZ292LnRyL2t1cnVtc2FsL21tZXNocy1zMy5jcnQwNAYIKwYBBQUHMAGGKGh0dHA6Ly9j aXNkdXBtbXMzLmt1cnVtc2FsLmthbXVzbS5nb3YudHIwCgYIKoZIzj0EAwMDaAAwZQIxAPcsn/rs WHmkpKee7T1JyY7BUyBlZbudEJnAOCl1u6GcyuQv7+BFTc3z0/zesH1T7wIwBE7coZ13HEEI9yvf 3J4Q74boxiPtT3bW+V3biPn+J2qZX1K3uWepFgrc/9w/1JgO</ds:X509Certificate>
-                            <ds:X509SubjectName>CN=KOLAYSOFT TEKNOLOJİ ANONİM ŞİRKETİ,SERIALNUMBER=5750464002</ds:X509SubjectName>
+                            <ds:X509SubjectName>CN=Yazılım TEKNOLOJİ ANONİM ŞİRKETİ,SERIALNUMBER=1111111111</ds:X509SubjectName>
                         </ds:X509Data>
                         <ds:KeyValue>
                             <ds:RSAKeyValue>
@@ -43,8 +43,8 @@
                                                 <ds:DigestValue>EbOf4Z+Gux/bJmLXow7c2jEPr1s9P6M0G3zpsPzC29Y=</ds:DigestValue>
                                             </xades:CertDigest>
                                             <xades:IssuerSerial>
-                                                <ds:X509IssuerName>CN=Mali Mühür Elektronik Sertifika Hizmet Sağlayıcısı - Sürüm 3,OU=BİLGEM,O=Türkiye Bilimsel ve Teknolojik Araştırma Kurumu - TÜBİTAK,L=Gebze - Kocaeli,C=TR</ds:X509IssuerName>
-                                                <ds:X509SerialNumber>14167620314586930</ds:X509SerialNumber>
+                                                <ds:X509IssuerName>CN=Mali XXXXX XXXXXX XXXXXXX XXXXXX XXXXXX - XXX X,XXXX=XXXXX,O=Türkiye XXXXXX ve XXXXXX XXXXXX XXXX - XXXXXX,L=XXXXXX - XXXXXX,C=TR</ds:X509IssuerName>
+                                                <ds:X509SerialNumber>1111111111111111</ds:X509SerialNumber>
                                             </xades:IssuerSerial>
                                         </xades:Cert>
                                     </xades:SigningCertificate>
@@ -64,36 +64,36 @@
     <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
     <cbc:CustomizationID>TR1.2</cbc:CustomizationID>
     <cbc:ProfileID>TEMELFATURA</cbc:ProfileID>
-    <cbc:ID>KLP2024000001695</cbc:ID>
+    <cbc:ID>XXXXXXXX</cbc:ID>
     <cbc:CopyIndicator>false</cbc:CopyIndicator>
-    <cbc:UUID>b0a2e3f6-7dc4-4d4b-b506-b83f6fe22d83</cbc:UUID>
-    <cbc:IssueDate>2024-08-13</cbc:IssueDate>
+    <cbc:UUID>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</cbc:UUID>
+    <cbc:IssueDate>XXXX-XX-XX</cbc:IssueDate>
     <cbc:IssueTime>14:40:06</cbc:IssueTime>
     <cbc:InvoiceTypeCode>SATIS</cbc:InvoiceTypeCode>
-    <cbc:Note>Yalnız #İkiBinİkiYüzSeksen TL#</cbc:Note>
+        <cbc:Note>Yalnız #İkiBinUCYUZSEKİZ TL#</cbc:Note>
     <cbc:DocumentCurrencyCode>TRY</cbc:DocumentCurrencyCode>
     <cbc:LineCountNumeric>1</cbc:LineCountNumeric>
     <cac:AdditionalDocumentReference>
-        <cbc:ID>e625c6af-9847-4880-8bb2-dad91667322c</cbc:ID>
-        <cbc:IssueDate>2024-08-13</cbc:IssueDate>
+        <cbc:ID>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXc</cbc:ID>
+        <cbc:IssueDate>XXXX-XX-XX</cbc:IssueDate>
         <cbc:DocumentType>XSLT</cbc:DocumentType>
         <cac:Attachment>
         </cac:Attachment>
     </cac:AdditionalDocumentReference>
     <cac:Signature>
-        <cbc:ID schemeID="VKN_TCKN">5750464002</cbc:ID>
+        <cbc:ID schemeID="VKN_TCKN">XXXXXXXXXX</cbc:ID>
         <cac:SignatoryParty>
             <cac:PartyIdentification>
-                <cbc:ID schemeID="VKN">5750464002</cbc:ID>
+                <cbc:ID schemeID="VKN">XXXXXXX</cbc:ID>
             </cac:PartyIdentification>
             <cac:PostalAddress>
                 <cbc:Room>201-204</cbc:Room>
-                <cbc:StreetName>A.T.G.B. Üniversiteler Mah. 1605. Cad.</cbc:StreetName>
+                <cbc:StreetName>Mimarsinan Mah. 120.Sokak</cbc:StreetName>
                 <cbc:BuildingName>Cyberpark Vakıf Binası</cbc:BuildingName>
                 <cbc:BuildingNumber>3</cbc:BuildingNumber>
-                <cbc:CitySubdivisionName>Çankaya</cbc:CitySubdivisionName>
-                <cbc:CityName>Ankara</cbc:CityName>
-                <cbc:PostalZone>06800</cbc:PostalZone>
+                <cbc:CitySubdivisionName>Efeler</cbc:CitySubdivisionName>
+                <cbc:CityName>Aydın</cbc:CityName>
+                <cbc:PostalZone>0900</cbc:PostalZone>
                 <cac:Country>
                     <cbc:Name>Türkiye</cbc:Name>
                 </cac:Country>
@@ -101,61 +101,61 @@
         </cac:SignatoryParty>
         <cac:DigitalSignatureAttachment>
             <cac:ExternalReference>
-                <cbc:URI>#Signature_b0a2e3f6-7dc4-4d4b-b506-b83f6fe22d83</cbc:URI>
+                <cbc:URI>#Signature_xxxxxxxxxxxxxxxxxxxxxxxxx</cbc:URI>
             </cac:ExternalReference>
         </cac:DigitalSignatureAttachment>
     </cac:Signature>
     <cac:AccountingSupplierParty>
         <cac:Party>
             <cac:PartyIdentification>
-                <cbc:ID schemeID="VKN">5750464002</cbc:ID>
+                <cbc:ID schemeID="VKN">XXXXXXXXXXXXXXX</cbc:ID>
             </cac:PartyIdentification>
             <cac:PartyName>
-                <cbc:Name>KOLAYSOFT TEKNOLOJİ ANONİM ŞİRKETİ</cbc:Name>
+                <cbc:Name>YAZILIM TEKNOLOJİ A.Ş ŞİRKETİ</cbc:Name>
             </cac:PartyName>
             <cac:PostalAddress>
-                <cbc:StreetName>A.T.G.B. Üniversiteler Mah. 1605. Cad. Kat:2 201-204 No:201-204</cbc:StreetName>
-                <cbc:CitySubdivisionName>Çankaya</cbc:CitySubdivisionName>
-                <cbc:CityName>Ankara</cbc:CityName>
-                <cbc:PostalZone>06800</cbc:PostalZone>
+                <cbc:StreetName>Mimarsinan mahallesi 120.sokak</cbc:StreetName>
+                <cbc:CitySubdivisionName>Efeler</cbc:CitySubdivisionName>
+                <cbc:CityName>Aydın</cbc:CityName>
+                <cbc:PostalZone>0900</cbc:PostalZone>
                 <cac:Country>
                     <cbc:Name>Türkiye</cbc:Name>
                 </cac:Country>
             </cac:PostalAddress>
             <cac:PartyTaxScheme>
                 <cac:TaxScheme>
-                    <cbc:Name>DOĞANBEY VERGİ DAİRESİ MÜDÜRLÜĞÜ</cbc:Name>
+                    <cbc:Name>XXXXX XXXXX XXXXX XXXXX</cbc:Name>
                 </cac:TaxScheme>
             </cac:PartyTaxScheme>
             <cac:Contact>
-                <cbc:ElectronicMail>info@kolaysoft.com.tr</cbc:ElectronicMail>
+                <cbc:ElectronicMail>yazilim@gmail.com</cbc:ElectronicMail>
             </cac:Contact>
         </cac:Party>
     </cac:AccountingSupplierParty>
     <cac:AccountingCustomerParty>
         <cac:Party>
             <cac:PartyIdentification>
-                <cbc:ID schemeID="TCKN">60208468330</cbc:ID>
+                <cbc:ID schemeID="TCKN">XXXXXXXX</cbc:ID>
             </cac:PartyIdentification>
             <cac:PostalAddress>
                 <cbc:CitySubdivisionName/>
-                <cbc:CityName>Aksaray</cbc:CityName>
+                <cbc:CityName>Aydın</cbc:CityName>
                 <cac:Country>
                     <cbc:Name>Türkiye</cbc:Name>
                 </cac:Country>
             </cac:PostalAddress>
             <cac:PartyTaxScheme>
                 <cac:TaxScheme>
-                    <cbc:Name>AKSARAY VERGİ DAİRESİ MÜDÜRLÜĞÜ</cbc:Name>
+                    <cbc:Name>XXX VERGİ DAİRESİ MÜDÜRLÜĞÜ</cbc:Name>
                 </cac:TaxScheme>
             </cac:PartyTaxScheme>
             <cac:Contact>
-                <cbc:Telephone>+905337176497</cbc:Telephone>
-                <cbc:ElectronicMail>yilki_68@hotmail.com</cbc:ElectronicMail>
+                <cbc:Telephone>XXXXXXX</cbc:Telephone>
+                <cbc:ElectronicMail>xxx@hotmail.com</cbc:ElectronicMail>
             </cac:Contact>
             <cac:Person>
-                <cbc:FirstName>MURAT</cbc:FirstName>
-                <cbc:FamilyName>KOÇ</cbc:FamilyName>
+                <cbc:FirstName>Fahriye</cbc:FirstName>
+                <cbc:FamilyName>Yüksel</cbc:FamilyName>
             </cac:Person>
         </cac:Party>
     </cac:AccountingCustomerParty>
@@ -171,7 +171,7 @@
             <cbc:Percent>20</cbc:Percent>
             <cac:TaxCategory>
                 <cac:TaxScheme>
-                    <cbc:Name>GERÇEK USULDE KATMA DEĞER VERGİSİ</cbc:Name>
+                    <cbc:Name>XXXX USUXXXDE XXXX XXXX XXXX</cbc:Name>
                     <cbc:TaxTypeCode>0015</cbc:TaxTypeCode>
                 </cac:TaxScheme>
             </cac:TaxCategory>
@@ -201,17 +201,17 @@
                 <cbc:Percent>20</cbc:Percent>
                 <cac:TaxCategory>
                     <cac:TaxScheme>
-                        <cbc:Name>GERÇEK USULDE KATMA DEĞER VERGİSİ</cbc:Name>
-                        <cbc:TaxTypeCode>0015</cbc:TaxTypeCode>
+                        <cbc:Name>XXXX XXXX KAXXXTMA XXXX XXXX</cbc:Name>
+                        <cbc:TaxTypeCode>0000</cbc:TaxTypeCode>
                     </cac:TaxScheme>
                 </cac:TaxCategory>
             </cac:TaxSubtotal>
         </cac:TaxTotal>
         <cac:Item>
-            <cbc:Name>Kolaysoft Eczacıpos Hizmet Bedeli</cbc:Name>
+            <cbc:Name>Yazılım Eczacıpost Hizmet Bedeli</cbc:Name>
         </cac:Item>
         <cac:Price>
-            <cbc:PriceAmount currencyID="TRY">380.00</cbc:PriceAmount>
+            <cbc:PriceAmount currencyID="TRY">480.00</cbc:PriceAmount>
         </cac:Price>
     </cac:InvoiceLine>
 </Invoice>

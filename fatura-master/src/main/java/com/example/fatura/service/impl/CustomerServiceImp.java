@@ -1,9 +1,11 @@
-package com.example.fatura.service;
+package com.example.fatura.service.impl;
 
 
 import com.example.fatura.core.ultitieds.result.*;
 import com.example.fatura.repository.CustomerRepository;
 import com.example.fatura.entities.Customer;
+import com.example.fatura.service.CustomerService;
+import com.example.fatura.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -87,20 +89,15 @@ public class CustomerServiceImp implements CustomerService {
     @Override
     public ResponseEntity<Result> deleteaccount(String customerEmail, String customerPassword) {
         try {
-            //Müşteriyi email adresine göre buluyoruz.
             Customer deleteCustomer = customerRepository.findByCompanyEmail(customerEmail);
-
-            //Müşterinin şifresi doğru ve müşteri null değil ise hesabını siliyoruz.
             if (deleteCustomer != null && passwordEncoder.matches(customerPassword, deleteCustomer.getCompanyPassword())){
                 customerRepository.delete(deleteCustomer);
                 return new ResponseEntity<>(new  SuccesResult("Müşteri başarıyla silindi."), HttpStatus.OK);
             }
             else {
-                //Müşteri bulunamaz veya şifre eşleşmezse hatayı döndürüyoruz.
                 return new ResponseEntity<>(new  ErrorResult("Müşteri silinirken bir hata oluştu."), HttpStatus.UNAUTHORIZED);
             }
         }catch (Exception e){
-            //Beklenmeyen bir durum olursa
             return new ResponseEntity<>(new ErrorResult("Beklenmeyen bir hata oluştu."), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

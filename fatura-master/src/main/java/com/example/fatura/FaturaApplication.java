@@ -10,6 +10,7 @@ public class FaturaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FaturaApplication.class, args);
+
 	}
 
 }

@@ -16,6 +16,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-ui/index.html","/swagger-ui.html","/swagger-ui/**","/v2/api-docs/**", "/swagger-resources/**").permitAll()
                 .antMatchers("/api/customer/**", "/api/product/**").permitAll() //Eklenen apiler için tek tek izin vermemek için.
                 .antMatchers("/api/filecontroller/**").permitAll()
+                .antMatchers("/api/colorcontroller/**").permitAll()
+                .antMatchers("/download").permitAll()
                 .anyRequest().authenticated()
 
                 .and()

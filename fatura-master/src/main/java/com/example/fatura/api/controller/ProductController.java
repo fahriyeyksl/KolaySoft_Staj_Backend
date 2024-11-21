@@ -1,9 +1,9 @@
-package com.example.fatura.api.contrellers;
+package com.example.fatura.api.controller;
 
 
-import com.example.fatura.service.ProductService;
 import com.example.fatura.core.ultitieds.result.Result;
 import com.example.fatura.entities.Product;
+import com.example.fatura.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +21,7 @@ public class ProductController {
 
     @PostMapping("/addProduct")
     public ResponseEntity<Result> addProduct(@RequestBody Product product) {
-        return  this.productService.addProduct(product);
+        return this.productService.addProduct(product);
     }
 
     @GetMapping("/getAllProduct")

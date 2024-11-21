@@ -7,7 +7,6 @@ import java.util.Base64;
 
 public class OtherUtils {
 
-    //Logo değişmesi istenilirse
     public static String encodeFileToBase64(String filePath) throws IOException {
         File file = new File(filePath);
         byte[] fileContent = Files.readAllBytes(file.toPath());
@@ -24,7 +23,6 @@ public class OtherUtils {
                 inSelector = true;
                 updatedCss.append(selector).append(" {\n");
             } else if (inSelector && line.trim().endsWith("}")) {
-                // Eğer top veya left henüz güncellenmediyse, burada ekle
                 if (!topUpdated) {
                     updatedCss.append("    ").append(newTop).append("\n");
                 }
@@ -83,9 +81,10 @@ public class OtherUtils {
 
 
         if (!inSelector && !styleUpdated) {
-            updateCss.append("    ").append(objectKeys).append(": ").append(objectValue).append(";\n");
+            updateCss.append(cssID).append(" {").append("\n")
+                    .append("    ").append(objectKeys).append(": ").append(objectValue).append(";\n")
+                    .append("}\n");
         }
-
         return updateCss.toString();
     }
 

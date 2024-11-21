@@ -9,9 +9,7 @@ import java.nio.file.Paths;
 public class XsltUtil {
     public static String getXslt() throws IOException {
         try {
-            // Dosya yolunu belirtiyorsunuz -- Her çağırıldığında yeniden okuma yapmasını istiyoruz ki güncellemeleri alalım
             Path path = Paths.get("C:\\Users\\Fahri\\IdeaProjects\\KolaySoftFatura\\backend\\fatura-master\\src\\main\\resources\\static\\billXslt.xslt");
-            // Dosyayı her seferinde diskten okuyor
             return new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
         } catch (Exception e) {
             e.printStackTrace();

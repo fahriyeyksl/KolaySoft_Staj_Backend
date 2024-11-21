@@ -1,9 +1,11 @@
-package com.example.fatura.api.contrellers;
+package com.example.fatura.api.controller;
+
 import com.example.fatura.service.FileService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import javax.xml.transform.*;
-import java.io.*;
+
+import javax.xml.transform.TransformerException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -16,24 +18,17 @@ public class FileController {
     public FileController(FileService fileService) {
         this.fileService = fileService;
     }
-
-    @GetMapping("/download")
-    @CrossOrigin(origins = "http://localhost:5173")
-    public ResponseEntity<?> getInvoiceByte() throws IOException, TransformerException {
-        return this.fileService.getInvoiceByte();
+    @GetMapping("dowloadXslt")
+    public ResponseEntity<?> dowloadXslt() throws IOException, TransformerException {
+        return this.fileService.dowloadXslt();
     }
-
-    @PostMapping("/updateXslt")
-    public ResponseEntity<?> updateXslt(@RequestBody Map<String, List<Double>> positionMap) {
-        return this.fileService.uppdateXslt(positionMap);
-    }
-
     @PostMapping(value = "/updateXsltCss")
-    public ResponseEntity<?> updateXsltCss (@RequestBody Map<String,Map<String,String>> styleMap){
+    public ResponseEntity<?> updateXsltCss(@RequestBody Map<String, Map<String, String>> styleMap) {
         return this.fileService.updateXsltCss(styleMap);
     }
+
     @GetMapping("/showXsltDowloadPage")
-    public  ResponseEntity<?> showXslt() {
+    public ResponseEntity<?> showXslt() {
         return this.fileService.showXslt();
     }
 

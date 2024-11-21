@@ -1,4 +1,4 @@
-package com.example.fatura.api.contrellers;
+package com.example.fatura.api.controller;
 
 import com.example.fatura.service.ColorService;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class ColorController {
     private final ColorService colorService;
+
     public ColorController(ColorService colorService) {
         this.colorService = colorService;
     }
+
     @GetMapping("/getallColors")
     public ResponseEntity<?> getAllColors() {
         return this.colorService.getAllColors();
